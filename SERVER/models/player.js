@@ -1,0 +1,27 @@
+const mongoose = require('mongoose')
+
+const PlayerSchema = new mongoose.Schema({
+   playerName : {
+      type: String,
+      required: true
+   },
+   jerseyNumber : {
+      type: Number,
+      required: true
+   },
+   position : {
+      type: String,
+      required: true,
+      enum: ['POINT GUARD', 'SHOOTING GUARD', 'SMALL FORWARD', 'POWER FORWARD', 'CENTER'],
+   },
+   image : {
+      type: String,
+      default: 'player.jpg'
+   },
+   performance: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Performance'
+   }
+})
+
+module.exports = mongoose.model('Player', PlayerSchema)
