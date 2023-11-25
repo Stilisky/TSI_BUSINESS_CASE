@@ -25,3 +25,11 @@ const deletePlayer = async (playerId) => {
    const player = await playerModel.findByIdAndDelete(playerId)
    return player;
 }
+
+module.exports = {
+   getPlayer,
+   getPlayers,
+   updatePlayer,
+   deletePlayer,
+   createPlayer
+}
