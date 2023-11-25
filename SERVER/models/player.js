@@ -18,10 +18,10 @@ const PlayerSchema = new mongoose.Schema({
       type: String,
       default: 'player.jpg'
    },
-   performance: {
+   games: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Performance'
-   }
+      ref: 'Game'
+   }]
 })
 
 module.exports = mongoose.model('Player', PlayerSchema)

@@ -1,12 +1,12 @@
 const playerModel = require('../models/player')
 
 const getPlayers = async () => {
-   const players = await playerModel.find().populate('performance')
+   const players = await playerModel.find().populate('games')
    return players
 }
 
 const getPlayer = async (id) => {
-   const player = await playerModel.findById(id).populate('performance')
+   const player = await playerModel.findById(id).populate('games')
    return player
 }
 

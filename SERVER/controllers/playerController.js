@@ -21,7 +21,10 @@ const getPlayer = async (req, res) => {
 
 const createPlayer = async (req, res) => {
    try {
-      
+      var performance;
+      if(req.body.performance) {
+         
+      }
    } catch (error) {
       res.status(500).json({'message': error})
    }
