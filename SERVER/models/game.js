@@ -21,6 +21,10 @@ const GameSchema = new mongoose.Schema({
       type: Number,
       default: 0,
    },
+   created_at: {
+      type: Date,
+      default: Date.now()
+   },
    player: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Player'

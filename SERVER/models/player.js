@@ -18,7 +18,7 @@ const PlayerSchema = new mongoose.Schema({
       type: String,
       default: 'player.jpg'
    },
-   games: [{
+   performance: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Game'
    }]
