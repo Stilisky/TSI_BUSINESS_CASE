@@ -12,7 +12,23 @@ const register = async (req, res) => {
          if(emailRegex.test(email)){
             if(usernameRegex.test(username)){
                password = bcrypt.hash(password, 13)
-               const user = await userService.register({email, password, username})
+               const users = await userService.getUsers()
+               var model;
+               if(users){
+                  model = {
+                     email: email,
+                     password: password,
+                     username: username
+                  }
+               } else {
+                  model = {
+                     email: email,
+                     password: password,
+                     username: username,
+                     role: 'ADMIN'
+                  }
+               }
+               const user = await userService.register(model)
                res.status(201).json(user)
             } else {
                res.status(400).json({'message': 'Invalid Username format'})
