@@ -11,25 +11,33 @@ const register = async (req, res) => {
       if (email && password && username){
          if(emailRegex.test(email)){
             if(usernameRegex.test(username)){
-               password = bcrypt.hash(password, 13)
+               const newPassword = await bcrypt.hash(password, 13)
                const users = await userService.getUsers()
+               console.log(users);
                var model;
-               if(users){
+               if(users.length != 0){
                   model = {
                      email: email,
-                     password: password,
-                     username: username
+                     password: newPassword,
+                     username: username,
+                     role: 'USER'
                   }
                } else {
                   model = {
                      email: email,
-                     password: password,
+                     password: newPassword,
                      username: username,
                      role: 'ADMIN'
                   }
                }
-               const user = await userService.register(model)
-               res.status(201).json(user)
+               console.log(model);
+               const exist = await userService.getUserByEmail(email)
+               if(exist){
+                  res.status(400).json({"message": "Email already exist"})
+               } else {
+                  const user = await userService.register(model)
+                  res.status(201).json(user)
+               }
             } else {
                res.status(400).json({'message': 'Invalid Username format'})
             }
