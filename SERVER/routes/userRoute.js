@@ -10,7 +10,9 @@ const {
    updateUser
 } = require('../controllers/userController')
 
-router.route('/users').get(authAdmin, getUsers).post(register)
+router.route('/users').get(authAdmin, getUsers)
 router.route('users/:userId').get(authAdmin, getUser).put(updateUser).delete(deleteUser)
+router.route('/login').post(login)
+router.route('/register').post(register)
 
 module.exports = {router}
