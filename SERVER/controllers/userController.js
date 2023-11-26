@@ -58,7 +58,8 @@ const login = async (req, res) => {
       if(email && password) {
          const user = await userService.getUserByEmail(email)
          if(user) {
-            if(bcrypt.compare(password, user.password)){
+            const match = await bcrypt.compare(password, user.password)
+            if(match){
                const token = jwt.sign(
                   {
                      id: user._id,
