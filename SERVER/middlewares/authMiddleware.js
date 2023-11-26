@@ -12,7 +12,7 @@ const authAdmin = async (req, res, next) => {
          }
          else{
             if(decodedToken.role == "ADMIN") {
-               req.params.userId = decodedToken.id
+               // req.params.userId = decodedToken.id
                next()
             }else {
                res.status(403).json("You are not authorize to access")

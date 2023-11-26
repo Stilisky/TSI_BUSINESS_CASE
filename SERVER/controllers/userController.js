@@ -96,16 +96,20 @@ const getUsers =  async (req, res) => {
 
 const getUser =  async (req, res) => {
    try {
-      const user = await userService.getUser(req.params.userid)
-      res.status(200).json(user)
+      const user = await userService.getUser(req.params.userId)
+      if(user) {
+         res.status(200).json(user)
+      } else {
+         res.status(400).json({"message": "User doesn't exist"})
+      }
    } catch (error) {
-      res.status(500).json({'message': 'Internal Server Error'})
+      res.status(400).json({'message': "User doesn't exist"})
    }
 }
 
 const updateUser = async (req, res) => {
    try {
-      const id = req.params.userid
+      const id = req.params.userId
       if(req.body.password) {
          req.body.password = bcrypt.hash(password, 13)
       }
@@ -118,7 +122,7 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
    try {
-      const id = req.params.id
+      const id = req.params.userId
       const user = await userService.deleteUser(id)
       if(user) {
          res.status(200).json({'message': 'User successfully deleted'})
