@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const GameSchema = new mongoose.Schema({
+   opposingTeam: {
+      type: String,
+      require: true
+   },
    pointsScored : {
       type: Number,
       default: 0,
