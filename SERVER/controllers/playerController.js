@@ -45,3 +45,11 @@ const deletePlayer = async (req, res) => {
       res.status(400).json({'message': error})
    }
 }
+
+module.exports = {
+   createPlayer,
+   getPlayer,
+   getPlayers,
+   deletePlayer,
+   updatePlayer
+}
