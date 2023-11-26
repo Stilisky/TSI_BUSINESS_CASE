@@ -9,13 +9,8 @@ const {
    register,
    updateUser
 } = require('../controllers/userController')
-const {
-   createPlayer,
-   deletePlayer,
-   getPlayer,
-   getPlayers,
-   updatePlayer
-} = require('../controllers/playerController')
-const {
-   
-} = require('../controllers/gameController')
+
+router.route('/users').get(authAdmin, getUsers).post(register)
+router.route('users/:userId').get(authAdmin, getUser).put(updateUser).delete(deleteUser)
+
+module.exports = {router}
