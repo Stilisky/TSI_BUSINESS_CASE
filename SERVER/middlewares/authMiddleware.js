@@ -26,3 +26,7 @@ const authAdmin = async (req, res, next) => {
       res.status(401).json("You are not authorize to access")
    }
 }
+
+module.exports = {
+   authAdmin
+}
