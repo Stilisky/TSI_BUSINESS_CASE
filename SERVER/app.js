@@ -1,6 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
+const cors = require('cors')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const connectDB = require('./configuration/db')
@@ -12,11 +12,11 @@ const gameRouter = require('./routes/gameRoute')
 var app = express();
 connectDB()
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+app.use(express.json({ extended: false }));
+app.get('/', (req, res) => {
+  res.send('TSI API v1.0');
+});
 
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1/', playerRoute)
