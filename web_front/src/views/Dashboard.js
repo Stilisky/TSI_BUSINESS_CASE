@@ -1,9 +1,43 @@
+import '../assets/css/dashStyle.css'
 import React from 'react'
+import Navbar from '../components/Navbar'
+import PlayerRow from '../components/PlayerRow'
 
 const Dashboard = () => {
   return (
     <>
-    
+      <Navbar />
+      <div className='flex justify-center mt-4'>
+         <h1 className='text-3xl font-bold text-blue-500'>TSI Players Informations</h1>
+      </div>
+      <div className='flex justify-end mr-8 mt-2'>
+         <button className='text-white rounded-xl bg-green-500 py-2 px-2 hover:bg-green-700'>
+            <h1 className='text-1xl font-bold'>Create new player</h1>
+         </button>
+      </div>
+      <div className='overflow-x-auto overflow-auto'>
+         <div className="bg-white shadow-md rounded my-6">
+            <table className="min-w-max w-full table-auto ">
+               <thead>
+                  <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                     <th className="py-3 px-6 text-left">Player</th>
+                     <th className="py-3 px-6 text-left">Player name</th>
+                     <th className="py-3 px-6 text-center">Jersey number</th>
+                     <th className="py-3 px-6 text-center">Position</th>
+                     <th className="py-3 px-6 text-center">AVG Points Scored</th>
+                     <th className="py-3 px-6 text-center">AVG Number of Assists</th>
+                     <th className="py-3 px-6 text-center">AVG Number of Intercepts</th>
+                     <th className="py-3 px-6 text-center">AVG Number Shots Blocked</th>
+                     <th className="py-3 px-6 text-center">Shot Success</th>
+                     <th className="py-3 px-6 text-center">Actions</th>
+                  </tr>
+               </thead>
+               <tbody className="text-gray-600 text-sm font-light">
+                  <PlayerRow/>
+               </tbody>
+            </table>
+         </div>
+      </div>
     </>
   )
 }
