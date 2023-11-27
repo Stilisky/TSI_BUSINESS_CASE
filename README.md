@@ -41,7 +41,7 @@ The server should now be running on the specified port (default: 5000).
 
 ### API Endpoints
 
-check swagger to all endpoints ``` /api/v1/swagger-ui ```
+check swagger to all endpoints ``` /api/v1/api-docs ```
 
 ## Unit Test
 
