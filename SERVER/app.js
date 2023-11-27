@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 const cors = require('cors')
 const connectDB = require('./configuration/db')
+const swaggerUi = require('swagger-ui-express')
+const swaggerSetup = require('./swagger.json')
 
 const usersRouter = require('./routes/userRoute')
 const playerRoute = require('./routes/playerRoute')
@@ -16,6 +18,7 @@ app.get('/', (req, res) => {
   res.send('TSI API v1.0');
 });
 
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSetup))
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1/', playerRoute)
 app.use('/api/v1/games', gameRouter)
