@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-// import basketball from '../assets/images/basketball.svg'
 import basketball1 from '../assets/images/basketball1.svg'
 import basketball2 from '../assets/images/basketball2.svg'
 import { Link } from 'react-router-dom'
