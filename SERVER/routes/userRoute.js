@@ -11,7 +11,7 @@ const {
 } = require('../controllers/userController')
 
 router.route('/users').get(authAdmin, getUsers)
-router.route('/users/:userId').get(authAdmin, getUser).put(updateUser).delete(deleteUser)
+router.route('/users/:userId').get(authAdmin, getUser).put(updateUser).delete(authAdmin, deleteUser)
 router.route('/login').post(login)
 router.route('/register').post(register)
 

@@ -13,7 +13,6 @@ const register = async (req, res) => {
             if(usernameRegex.test(username)){
                const newPassword = await bcrypt.hash(password, 13)
                const users = await userService.getUsers()
-               console.log(users);
                var model;
                if(users.length != 0){
                   model = {
@@ -30,7 +29,6 @@ const register = async (req, res) => {
                      role: 'ADMIN'
                   }
                }
-               console.log(model);
                const exist = await userService.getUserByEmail(email)
                if(exist){
                   res.status(400).json({"message": "Email already exist"})

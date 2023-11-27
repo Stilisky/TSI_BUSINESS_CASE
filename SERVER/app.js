@@ -1,8 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
 const cors = require('cors')
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const connectDB = require('./configuration/db')
 
 const usersRouter = require('./routes/userRoute')
