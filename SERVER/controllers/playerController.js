@@ -5,7 +5,7 @@ const getPlayers = async (req, res) => {
       const players = await playerService.getPlayers()
       res.status(200).json(players)
    } catch (error) {
-      res.status(400).json({'message': error})
+      res.status(400).json({'message': "Invalid Server"})
    }
 }
 
@@ -15,16 +15,21 @@ const getPlayer = async (req, res) => {
       const player = await playerService.getPlayer(id)
       res.status(200).json(player)
    } catch (error) {
-      res.status(400).json({'message': error})
+      res.status(400).json({'message': "Player doesn't exist"})
    }
 }
 
 const createPlayer = async (req, res) => {
    try {
-      const player = await playerService.createPlayer(req.body)
-      res.status(201).json(player)
+      const exist = await playerService.getPlayerByName(req.body.playerName)
+      if(exist) {
+         res.status(400).json({"message": "Player already exist"})
+      } else {
+         const player = await playerService.createPlayer(req.body)
+         res.status(201).json(player)
+      }
    } catch (error) {
-      res.status(400).json({'message': error})
+      res.status(500).json({'message': error})
    }
 }
 
@@ -40,9 +45,13 @@ const updatePlayer = async (req, res) => {
 const deletePlayer = async (req, res) => {
    try {
       const player = await playerService.deletePlayer(req.params.playerId)
-      res.status(201).json(player)
+      if(player){
+         res.status(201).json("Player succeffuly deleted")
+      } else {
+         res.status(400).json("Player doesn't exist")
+      }
    } catch (error) {
-      res.status(400).json({'message': error})
+      res.status(400).json({'message': "Player doesn't exist"})
    }
 }
 

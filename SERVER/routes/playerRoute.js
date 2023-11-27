@@ -11,4 +11,4 @@ const {authAdmin} = require('../middlewares/authMiddleware')
 router.route('/players').get(getPlayers).post(authAdmin, createPlayer)
 router.route('/players/:playerId').get(getPlayer).put(authAdmin, updatePlayer).delete(authAdmin, deletePlayer)
 
-module.exports = {router}
+module.exports = router

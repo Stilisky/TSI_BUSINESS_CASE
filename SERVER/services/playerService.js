@@ -1,12 +1,17 @@
 const playerModel = require('../models/player')
 
 const getPlayers = async () => {
-   const players = await playerModel.find().populate({ path: 'performance', options: {sort: {created_at: -1}, limit: 5}})
+   const players = await playerModel.find().populate()
    return players
 }
 
 const getPlayer = async (id) => {
-   const player = await playerModel.findById(id).populate({ path: 'performance', options: {sort: {created_at: -1}, limit: 5}})
+   const player = await playerModel.findById(id).populate()
+   return player
+}
+
+const getPlayerByName = async(name) => {
+   const player = await playerModel.findOne({playerName: name})
    return player
 }
 
@@ -17,7 +22,8 @@ const createPlayer = async (player) => {
 }
 
 const updatePlayer = async (playerId, player) => {
-   const upPlayer = await playerModel.findByIdAndUpdate(playerId, player)
+   await playerModel.findByIdAndUpdate(playerId, player)
+   const upPlayer = await playerModel.findById(playerId)
    return upPlayer
 }
 
@@ -31,5 +37,6 @@ module.exports = {
    getPlayers,
    updatePlayer,
    deletePlayer,
-   createPlayer
+   createPlayer,
+   getPlayerByName
 }

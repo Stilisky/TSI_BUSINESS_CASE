@@ -6,6 +6,7 @@ var logger = require('morgan');
 const connectDB = require('./configuration/db')
 
 const usersRouter = require('./routes/userRoute')
+const playerRoute = require('./routes/playerRoute')
 
 var app = express();
 connectDB()
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/auth', usersRouter);
+app.use('/api/v1/', playerRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
