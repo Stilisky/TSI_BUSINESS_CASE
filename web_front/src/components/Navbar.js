@@ -1,8 +1,14 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+   const navigate =useNavigate()
    const token = localStorage.getItem('token')
+
+   const handleLogout = async () => {
+      localStorage.removeItem('token')
+      navigate('/')
+   }
   return (
     <>
       <div className='flex justify-between mt-4 border-b-2 pb-4'>
@@ -11,15 +17,17 @@ const Navbar = () => {
          </div>
          <div className='flex flex-around mr-4'>
             {token ? 
-               <button className='text-white rounded-xl bg-green-500 py-2 px-2 hover:bg-green-700' >
-                  <h1 className='text-1xl font-bold'>LOGIN</h1>
-               </button> :
-               <button className='text-white rounded-xl bg-red-500 py-2 px-2 hover:bg-red-700' >
+               <button className='text-white rounded-xl bg-red-500 py-2 px-2 hover:bg-red-700' onClick={handleLogout}>
                   <h1 className='text-1xl font-bold'>LOGOUT</h1>
+               </button> :
+               <button className='text-white rounded-xl bg-green-500 py-2 px-2 hover:bg-green-700' >
+                  <Link to={'/login'}>
+                     <h1 className='text-1xl font-bold'>LOGIN</h1>
+                  </Link>
                </button>
             }
             <button className='text-white rounded-xl bg-blue-500 py-2 px-2 ml-4 hover:bg-blue-700' >
-               <Link to={'/'}>
+               <Link to={'/dashboard'}>
                   <h1 className='text-1xl font-bold'>DASHBOARD</h1>
                </Link>
             </button>

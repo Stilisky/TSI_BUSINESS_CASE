@@ -2,38 +2,32 @@ import React, { useState } from "react";
 import basketball from '../assets/images/basketball.svg'
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Login = () => {
    const [error, setError] = useState(null)
-   const [passwordsMatch, setMatch] = useState(true)
-   const [username, setName] = useState(null)
    const [pass, setPass] = useState(null)
-   const [confpass, setConf] = useState(null)
    const [email, setEmail] = useState(null)
    const navigation = useNavigate()
 
    const handleSubmit = async () => {
       try {
-         if(pass === confpass) {
-            const request = {
-               username : username,
-               email: email,
-               password: pass
-            }
-            console.log(request);
-            const url = "http://127.0.0.1:5000/api/v1/auth/register"
-            const response = await fetch(url, {
-               method: 'POST',
-               headers: {
-                  'content-Type': 'application/json'
-               },
-               body: JSON.stringify(request)
-            })
-            if(response.ok){
-               navigation('/login')
-            }
-         } else {
-            setMatch(false)
-         }
+        const request = {
+            email: email,
+            password: pass
+        }
+        console.log(request);
+        const url = "http://127.0.0.1:5000/api/v1/auth/login"
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'content-Type': 'application/json'
+            },
+            body: JSON.stringify(request)
+        })
+        if(response.ok){
+          const data = await response.json()
+          localStorage.setItem('token', data.acces_token)
+          navigation('/dashboard')
+        }
       } catch (error) {
          setError(error.message)
       }
@@ -73,7 +67,7 @@ const Register = () => {
                         </svg>
                       </a>
                       <p className="w-full text-4xl mb-2 font-medium text-center leading-snug font-serif">
-                        REGISTRATION
+                        LOGIN
                       </p>
                     </div>
                     {error && (
@@ -81,31 +75,9 @@ const Register = () => {
                         {error}
                       </p>
                     )}
-                    {!passwordsMatch && (
-                      <p className="text-red-500 text-center text-sm">
-                        Passwords do not match
-                      </p>
-                    )}
 
                     <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
-                      <div className="relative">
-                        <p
-                          className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
-                  absolute"
-                        >
-                          Username
-                        </p>
-                        <input
-                          placeholder="John"
-                          type="text"
-                          className="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-                  border-gray-300 rounded-md"
-                          id="username"
-                          name="username"
-                          onChange={(text) => {setName(text.target.value)} }
-                        />
-                      </div>
+                      
                       <div className="relative">
                         <p
                           className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
@@ -143,24 +115,7 @@ const Register = () => {
                           onChange={(mdp) => {setPass(mdp.target.value)}}
                         />
                       </div>
-                      <div className="relative">
-                        <p
-                          className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600
-                  absolute"
-                        >
-                          Confirm password
-                        </p>
-                        <input
-                          type="password"
-                          className="border placeholder-gray-400 focus:outline-none
-                  focus:border-black w-full pt-4 pr-4 pb-4 pl-4 mt-2 mr-0 mb-0 ml-0 text-base block bg-white
-                  border-gray-300 rounded-md"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          placeholder="Confirm your password"
-                          onChange={(mdp) => {setConf(mdp.target.value)}}
-                        />
-                      </div>
+                      
                       <div className="relative">
                         <button
                           onClick={handleSubmit}
@@ -172,10 +127,10 @@ const Register = () => {
                       <div>
                         <p className="text-center my-4">
                           <a
-                            href="/login"
+                            href="/register"
                             className="text-red-500 text-sm hover:underline"
                           >
-                            I already have an account !
+                            Create an account !
                           </a>
                         </p>
                       </div>
@@ -376,4 +331,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

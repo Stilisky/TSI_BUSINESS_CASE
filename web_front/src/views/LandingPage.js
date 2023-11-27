@@ -25,7 +25,7 @@ const LandingPage = () => {
             </p>
             <div className='flex justify-center ml-8 mt-4'>
                <button className='text-white rounded-xl bg-blue-500 py-2 px-2 ml-4 hover:bg-blue-700' >
-                  <Link to={'/'}>
+                  <Link to={'/dashboard'}>
                      <h1 className='text-1xl font-bold'>PLAYERS</h1>
                   </Link>
                </button>
@@ -48,7 +48,7 @@ const LandingPage = () => {
             </p>
             <div className='flex justify-center mt-4'>
                <button className='text-white rounded-xl bg-green-500 py-2 px-2 ml-4 hover:bg-green-700' >
-                  <Link to={'/'}>
+                  <Link to={'/dashboard'}>
                      <h1 className='text-1xl font-bold'>PLAYERS PERFORMANCE</h1>
                   </Link>
                </button>
