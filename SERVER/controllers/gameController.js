@@ -3,7 +3,7 @@ const playerService = require('../services/playerService')
 
 const getGames = async (req, res) => {
    try {
-      const games = gameService.getGames()
+      const games = await gameService.getGames()
       res.status(200).json(games)
    } catch (error) {
       res.status(400).json({"message": error})
@@ -12,7 +12,7 @@ const getGames = async (req, res) => {
 
 const getGame = async (req, res) => {
    try {
-      const game = gameService.getGame(req.params.gameId)
+      const game = await gameService.getGame(req.params.gameId)
       res.status(200).json(game)
    } catch (error) {
       res.status(400).json({"message": error})
@@ -51,9 +51,9 @@ const deleteGame = async (req, res) => {
    try {
       const game = await gameService.deleteGame(req.params.gameId)
       if(game) {
-         res.status(200).json({"message": 'Player has been deleted'})
+         res.status(200).json({"message": 'Match has been deleted'})
       } else {
-         res.status(400).json({'message': "This player doesn't exist"})
+         res.status(400).json({'message': "This Match doesn't exist"})
       }
    } catch (error) {
       res.status(400).json({"message": error})

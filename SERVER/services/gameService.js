@@ -1,12 +1,12 @@
 const gameModel = require('../models/game')
 
 const getGames = async () => {
-   const games = await gameModel.find()
+   const games = await gameModel.find().populate('player')
    return games
 }
 
 const getGame = async (id) => {
-   const game = await gameModel.findById(id)
+   const game = await gameModel.findById(id).populate('player')
    return game
 }
 
@@ -17,7 +17,8 @@ const addGame = async (game) => {
 }
 
 const updateGame = async (id, game) => {
-   const up = await gameModel.findByIdAndUpdate(id, game)
+   await gameModel.findByIdAndUpdate(id, game)
+   const up = await gameModel.findById(id)
    return up;
 }
 

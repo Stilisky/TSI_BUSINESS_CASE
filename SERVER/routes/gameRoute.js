@@ -9,8 +9,8 @@ const {
    updateGame
 } = require('../controllers/gameController')
 
-router.route('/games').get(authAdmin, getGames)
-router.route('/game/:gameId').get(authAdmin, getGame).put(authAdmin, updateGame).delete(authAdmin, deleteGame)
-router.route('/game/player/:playerId').post(authAdmin, createGame)
+router.route('/').get(authAdmin, getGames)
+router.route('/:gameId').get(authAdmin, getGame).put(authAdmin, updateGame).delete(authAdmin, deleteGame)
+router.route('/player/:playerId').post(authAdmin, createGame)
 
-module.exports = {router}
+module.exports = router

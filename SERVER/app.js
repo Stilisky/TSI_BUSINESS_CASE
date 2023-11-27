@@ -7,6 +7,7 @@ const connectDB = require('./configuration/db')
 
 const usersRouter = require('./routes/userRoute')
 const playerRoute = require('./routes/playerRoute')
+const gameRouter = require('./routes/gameRoute')
 
 var app = express();
 connectDB()
@@ -19,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1/', playerRoute)
+app.use('/api/v1/games', gameRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
