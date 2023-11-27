@@ -5,11 +5,9 @@ const Navbar = () => {
    const token = localStorage.getItem('token')
   return (
     <>
-      <div className='flex justify-between mt-4'>
+      <div className='flex justify-between mt-4 border-b-2 pb-4'>
          <div className='ml-4'>
             <h1 className='text-2xl font-bold'>T S I</h1>
-         </div>
-         <div>
          </div>
          <div className='flex flex-around mr-4'>
             {token ? 
@@ -23,7 +21,7 @@ const Navbar = () => {
             <button className='text-white rounded-xl bg-blue-500 py-2 px-2 ml-4 hover:bg-blue-700' >
                <Link to={'/'}>
                   <h1 className='text-1xl font-bold'>DASHBOARD</h1>
-               </Link>               
+               </Link>
             </button>
          </div>
       </div>
