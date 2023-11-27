@@ -1,21 +1,41 @@
 import React, { useState } from "react";
 import basketball from '../assets/images/basketball.svg'
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
    const [error, setError] = useState(null)
-   const [passwordsMatch, setMatch] = useState(false)
+   const [passwordsMatch, setMatch] = useState(true)
    const [username, setName] = useState(null)
    const [pass, setPass] = useState(null)
    const [confpass, setConf] = useState(null)
    const [email, setEmail] = useState(null)
-
-
-   const handleChange = async () => {
-
-   }
+   const navigation = useNavigate()
 
    const handleSubmit = async () => {
-      
+      try {
+         if(pass === confpass) {
+            const request = {
+               username : username,
+               email: email,
+               password: pass
+            }
+            console.log(request);
+            const url = "http://127.0.0.1:5000/api/v1/auth/register"
+            const response = await fetch(url, {
+               headers: {
+                  'content-Type': 'application/json'
+               },
+               body: JSON.stringify(request)
+            })
+            if(response.ok){
+               navigation('/login')
+            }
+         } else {
+            setMatch(false)
+         }
+      } catch (error) {
+         setError(error.message)
+      }
    }
   return (
     <>
@@ -29,7 +49,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="w-full mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
-                <form onSubmit={handleSubmit}>
+                <div>
                   <div
                     className="flex flex-col items-start justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl
             relative z-10"
@@ -82,7 +102,7 @@ const Register = () => {
                   border-gray-300 rounded-md"
                           id="username"
                           name="username"
-                          onChange={(text) => {setEmail(text)} }
+                          onChange={(text) => {setName(text.target.value)} }
                         />
                       </div>
                       <div className="relative">
@@ -100,7 +120,7 @@ const Register = () => {
                           id="email"
                           type="email"
                           name="email"
-                          onChange={(mail) => setEmail(mail)}
+                          onChange={(mail) => setEmail(mail.target.value)}
                         />
                       </div>
 
@@ -119,7 +139,7 @@ const Register = () => {
                   border-gray-300 rounded-md"
                           id="password"
                           name="password"
-                          onChange={(mdp) => {setPass(mdp)}}
+                          onChange={(mdp) => {setPass(mdp.target.value)}}
                         />
                       </div>
                       <div className="relative">
@@ -137,13 +157,12 @@ const Register = () => {
                           id="confirmPassword"
                           name="confirmPassword"
                           placeholder="Confirm your password"
-                          onChange={(mdp) => {setConf(mdp)}}
+                          onChange={(mdp) => {setConf(mdp.target.value)}}
                         />
                       </div>
                       <div className="relative">
                         <button
-                          type="submit"
-                          id="submit-btn"
+                          onClick={handleSubmit}
                           className=" w-full text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                         >
                           Submit
@@ -161,7 +180,7 @@ const Register = () => {
                       </div>
                     </div>
                   </div>
-                </form>
+                </div>
 
                 <svg
                   viewbox="0 0 91 91"
