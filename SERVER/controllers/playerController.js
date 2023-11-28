@@ -55,10 +55,67 @@ const deletePlayer = async (req, res) => {
    }
 }
 
+const statistique = async (req, res) => {
+   try {
+      const playerId = req.params.playerId
+      const player = await playerService.getPlayer(playerId)
+      const length = player.performance.length
+      var data = null;
+      if(length > 0) {
+         const matches = player.performance
+         var ps = 0
+         var na = 0
+         var ni = 0
+         var sb = 0
+         var ss = 0;
+         matches.forEach(element => {
+            ps += element.pointsScored;
+            na += element.numberAssists;
+            ni += element.numberIntercepts;
+            sb += element.numberShotsBlocked;
+            ss += element.shotSuccess;
+         });
+         // ps = ps/length;
+         // na = na/length;
+         // ni = ni/length;
+         // nb = nb/length;
+         // ss = ss/length;
+         data = {
+            avgPointsScored: Number.parseFloat(ps/length).toFixed(2),
+            avgNumberAssists: Number.parseFloat(na/length).toFixed(2),
+            avgNumberIntercepts:Number.parseFloat(ni/length).toFixed(2),
+            avgNumberShotsBlocked: Number.parseFloat(sb/length).toFixed(2),
+            avgShotSuccess: Number.parseFloat(ss/length).toFixed(2)
+         }
+
+         // data = {
+         //    avgPointsScored: ps,
+         //    avgNumberAssists: na,
+         //    avgNumberIntercepts:ni,
+         //    avgNumberShotsBlocked: nb,
+         //    avgShotSuccess: ss
+         // }
+      } else {
+         data = {
+            avgPointsScored: 0,
+            avgNumberAssists: 0,
+            avgNumberIntercepts:0,
+            avgNumberShotsBlocked: 0,
+            avgShotSuccess: 0
+         }
+      }
+      
+      res.status(200).json(data)
+   } catch (error) {
+      res.status(400).json({'message': "Player doesn't exist"})
+   }
+}
+
 module.exports = {
    createPlayer,
    getPlayer,
    getPlayers,
    deletePlayer,
-   updatePlayer
+   updatePlayer,
+   statistique
 }
