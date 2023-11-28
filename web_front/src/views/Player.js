@@ -6,9 +6,11 @@ import DetailsRow from '../components/DetailsRow'
 
 const Player = () => {
    const [player, setPlayer] = useState([])
+   const [avg, setAvg] = useState([])
    const [matches, setMatches] = useState([])
    const playerid = useParams()
    useEffect(() => {
+      stats()
       getPlayer()
    }, [])
 
@@ -20,6 +22,19 @@ const Player = () => {
          const data = await response.json()
          setPlayer(data)
          setMatches(data.performance.slice(-5))
+      } catch (error) {
+         console.log(error);
+      }
+   }
+
+   const stats = async () => {
+      try {
+         const url = `http://127.0.0.1:5000/api/v1/players/${playerid.playerId}/statistiques`
+            const response = await fetch(url)
+            if(response.ok) {
+               const data = await response.json()
+               setAvg(data)
+            }
       } catch (error) {
          console.log(error);
       }
@@ -40,14 +55,14 @@ const Player = () => {
                   <h3 className='text-2xl mt-4 '>Player Name: {player.playerName}</h3>
                   
                   <h3 className='text-2xl mt-4'>Jersey Number: {player.jerseyNumber}</h3>
-                  <h3 className='text-2xl mt-4'>AVG Points Scored: 15</h3>
-                  <h3 className='text-2xl mt-4'>AVG Number of Assists: 15</h3>
+                  <h3 className='text-2xl mt-4'>AVG Points Scored: {avg.avgPointsScored}</h3>
+                  <h3 className='text-2xl mt-4'>AVG Number of Assists: {avg.avgNumberAssists}</h3>
                </div>
                <div className='mr-8 '>
                   <h3 className='text-2xl mt-4'>Number of Matches: {matches.length} </h3>
                   <h3 className='text-2xl mt-4'>Position: {player.position} </h3>
-                  <h3 className='text-2xl mt-4'>AVG Number of Intercepts: 45 </h3>
-                  <h3 className='text-2xl mt-4'>AVG Shot Success: 85 </h3>
+                  <h3 className='text-2xl mt-4'>AVG Number of Intercepts: {avg.avgNumberIntercepts} </h3>
+                  <h3 className='text-2xl mt-4'>AVG Rate Shot Success: {avg.avgShotSuccess} %</h3>
                   {/* <button className='mt-4 text-white rounded-xl bg-blue-500 py-2 px-2 hover:bg-green-700'>
                      <h1 className='text-1xl font-bold'>Update player</h1>
                   </button> */}

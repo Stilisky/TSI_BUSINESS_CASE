@@ -1,13 +1,17 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import playerimg from '../assets/images/player.png'
 import { Link, useNavigate } from 'react-router-dom'
 import EditPlayer from './EditPlayer'
 
 const PlayerRow = ({player, getPlayers}) => {
-   const [avg, setAvg] =useState(null)
+   const [avg, setAvg] =useState([])
    const [open, setOpen] = useState(false)
    const navigate = useNavigate()
+
+   useEffect(() => {
+      stats()
+   }, [])
 
    const handleDelete = async () => {
       try {
@@ -30,6 +34,19 @@ const PlayerRow = ({player, getPlayers}) => {
          console.log(error);
       }
    }
+
+   const stats = async () => {
+      try {
+         const url = `http://127.0.0.1:5000/api/v1/players/${player._id}/statistiques`
+            const response = await fetch(url)
+            if(response.ok) {
+               const data = await response.json()
+               setAvg(data)
+            }
+      } catch (error) {
+         console.log(error);
+      }
+   }
   return (
     <>
       <tr className="border-b border-gray-200 bg-white hover:bg-gray-100">
@@ -45,31 +62,31 @@ const PlayerRow = ({player, getPlayers}) => {
          </td>
          
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">{player.jerseyNumber}</span>
+            <span className="font-medium">{player.jerseyNumber}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">{player.position}</span>
+            <span className="font-medium">{player.position}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">48</span>
+            <span className="font-medium">{avg.avgPointsScored}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">52</span>
+            <span className="font-medium">{avg.avgNumberAssists}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">58</span>
+            <span className="font-medium">{avg.avgNumberIntercepts}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">54</span>
+            <span className="font-medium">{avg.avgNumberShotsBlocked}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">896</span>
+            <span className="font-medium">{avg.avgShotSuccess} %</span>
          </td>
          
          <td className="py-3 px-6 text-center">
