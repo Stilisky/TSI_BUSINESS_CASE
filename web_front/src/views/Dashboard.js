@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import PlayerRow from '../components/PlayerRow'
 import PlayerModel from '../components/PlayerModel'
+import MatchModel from '../components/MatchModel'
 
 const Dashboard = () => {
    const [players, setPlayers] = useState(null)
    const [openModal,setModal] = useState(false)
+   const [openPerform,setPerform] = useState(false)
 
    useEffect(() => {
       getPlayers()
@@ -31,11 +33,12 @@ const Dashboard = () => {
          <button className='mr-4 text-white rounded-xl bg-green-500 py-2 px-2 hover:bg-green-700' onClick={() => setModal(true)}>
             <h1 className='text-1xl font-bold'>Create new player</h1>
          </button>
-         <button className='text-white rounded-xl bg-blue-500 py-2 px-2 hover:bg-blue-700'>
+         <button className='text-white rounded-xl bg-blue-500 py-2 px-2 hover:bg-blue-700' onClick={() => setPerform(true)}>
             <h1 className='text-1xl font-bold'>Add new Performance to player</h1>
          </button>
       </div>
       <PlayerModel isOpen={openModal} closeModal={() => setModal(false)} getPlayers={getPlayers}/>
+      <MatchModel players={players} isOpen={openPerform} closeModal={() => setPerform(false)}/>
       <div className='overflow-x-auto overflow-auto scrollstyle'>
          <div className="bg-white shadow-md rounded my-6">
             <table className="min-w-max w-full border table-auto m-4">

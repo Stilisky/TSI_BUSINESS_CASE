@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
