@@ -90,8 +90,8 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
                   <option value={'CENTER'}>CENTER</option>
                </select>
 
-               <label for="position" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Player image </label>
-               <input onChange={(text) => {setImg(text.target.value)}} type='file' className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-blue-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" />
+               <label for="photo" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Player image </label>
+               <input onChange={(text) => {setImg(text.target.value)}} type='file' className=" mt-2 text-gray-600 focus:outline-none font-normal w-full h-10 flex items-center pl-3 text-sm  " />
 
                <div className="flex items-center justify-start w-full">
                   <button onClick={handleSubmit} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700 transition duration-150 ease-in-out hover:bg-green-600 bg-green-700 rounded text-white px-8 py-2 text-sm">Create player</button>
