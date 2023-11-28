@@ -1,13 +1,32 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useState } from 'react'
 import playerimg from '../assets/images/player.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const PlayerRow = ({player}) => {
+const PlayerRow = ({player, getPlayers}) => {
    const [avg, setAvg] =useState(null)
+   const navigate = useNavigate()
 
    const handleDelete = async () => {
-
+      try {
+         const token = localStorage.getItem('token')
+         if(!token){
+            navigate('/login')
+         } else {
+            const url = `http://127.0.0.1:5000/api/v1/players/${player._id}`
+            const response = await fetch(url, {
+               method: 'DELETE',
+               headers: {
+                  'Authorization': `Bearer ${token}`
+               },
+            })
+            if(response.ok) {
+               getPlayers()
+            }
+         }
+      } catch (error) {
+         console.log(error);
+      }
    }
   return (
     <>
@@ -54,7 +73,7 @@ const PlayerRow = ({player}) => {
          <td className="py-3 px-6 text-center">
             <div className="flex item-center justify-center">
                <button className="w-4 mr-4 transform hover:text-green-500 hover:scale-110">
-                  <Link to={`/players/views/id`}>
+                  <Link to={`/players/views/${player._id}`}>
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
