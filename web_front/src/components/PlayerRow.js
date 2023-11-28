@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react'
-import player from '../assets/images/player.png'
+import React, { useState } from 'react'
+import playerimg from '../assets/images/player.png'
 import { Link } from 'react-router-dom'
 
-const PlayerRow = () => {
+const PlayerRow = ({player}) => {
+   const [avg, setAvg] =useState(null)
+
    const handleDelete = async () => {
 
    }
@@ -12,21 +14,21 @@ const PlayerRow = () => {
       <tr className="border-b border-gray-200 bg-white hover:bg-gray-100">
          <td className="py-3 px-6 text-left">
             <div className="flex items-center">
-               <img src={player} alt="iMac Front Image" class="w-auto rounded-lg h-8 mr-3"/>
+               <img src={playerimg} alt="iMac Front Image" class="w-auto rounded-lg h-8 mr-3"/>
             </div>
          </td>
          <td className="py-3 px-6 text-left">
             <div className="flex items-center">
-                  <span className="font-medium">Le Bron James</span>
+                  <span className="font-medium">{player.playerName}</span>
             </div>
          </td>
          
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">5</span>
+         <span className="font-medium">{player.jerseyNumber}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
-         <span className="font-medium">CENTER</span>
+         <span className="font-medium">{player.position}</span>
          </td>
 
          <td className="py-3 px-6 text-center">
@@ -51,7 +53,7 @@ const PlayerRow = () => {
          
          <td className="py-3 px-6 text-center">
             <div className="flex item-center justify-center">
-               <button className="w-4 mr-4 transform hover:text-blue-500 hover:scale-110">
+               <button className="w-4 mr-4 transform hover:text-green-500 hover:scale-110">
                   <Link to={`/players/views/id`}>
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -68,7 +70,7 @@ const PlayerRow = () => {
                   </Link>
                </button>    
 
-               <button className="w-4 mr-4 transform hover:text-blue-500 hover:scale-110" onClick={handleDelete}>
+               <button className="w-4 mr-4 transform hover:text-red-500 hover:scale-110" onClick={handleDelete}>
                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                </svg>

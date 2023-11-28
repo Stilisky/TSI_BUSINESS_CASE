@@ -1,9 +1,23 @@
 import '../assets/css/dashStyle.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import PlayerRow from '../components/PlayerRow'
 
 const Dashboard = () => {
+   const [players, setPlayers] = useState(null)
+   useEffect(() => {
+      getPlayers()
+   }, [])
+   const getPlayers = async () => {
+      try {
+         const url = "http://127.0.0.1:5000/api/v1/players"
+         const response = await fetch(url)
+         const data = await response.json()
+         setPlayers(data)
+      } catch (error) {
+         console.log(error);
+      }
+   }
   return (
     <>
       <Navbar />
@@ -36,15 +50,9 @@ const Dashboard = () => {
                   </tr>
                </thead>
                <tbody className="text-gray-600 text-sm font-light">
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
-                  <PlayerRow/>
+                  {players && players.map((player, index) => (
+                     <PlayerRow player={player} key={index}/>
+                  ))}
                </tbody>
             </table>
          </div>
