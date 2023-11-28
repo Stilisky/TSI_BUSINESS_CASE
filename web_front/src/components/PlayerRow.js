@@ -2,9 +2,11 @@
 import React, { useState } from 'react'
 import playerimg from '../assets/images/player.png'
 import { Link, useNavigate } from 'react-router-dom'
+import EditPlayer from './EditPlayer'
 
 const PlayerRow = ({player, getPlayers}) => {
    const [avg, setAvg] =useState(null)
+   const [open, setOpen] = useState(false)
    const navigate = useNavigate()
 
    const handleDelete = async () => {
@@ -81,12 +83,11 @@ const PlayerRow = ({player, getPlayers}) => {
                   </Link>
                </button>
 
-               <button className="w-4 mr-4 transform hover:text-blue-500 hover:scale-110">
-                  <Link to={`/players/edit/id`}>
+               <button onClick={() => setOpen(true)} className="w-4 mr-4 transform hover:text-blue-500 hover:scale-110">
+                 
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                      </svg>
-                  </Link>
                </button>    
 
                <button className="w-4 mr-4 transform hover:text-red-500 hover:scale-110" onClick={handleDelete}>
@@ -97,6 +98,7 @@ const PlayerRow = ({player, getPlayers}) => {
             </div>
          </td>
       </tr>
+      <EditPlayer isOpen={open} player={player} getPlayers={getPlayers} key={player._id} closeModal={() => setOpen(false)}/>
     </>
   )
 }
