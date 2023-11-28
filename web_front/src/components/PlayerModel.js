@@ -12,7 +12,7 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    
    useEffect(() => {
       checkUser()
-   })
+   }, [])
    
    const checkUser = () => {
       const token = localStorage.getItem('token')

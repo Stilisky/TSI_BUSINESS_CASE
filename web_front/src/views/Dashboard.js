@@ -49,7 +49,7 @@ const Dashboard = () => {
                      <th className="py-3 px-6 text-center">AVG Number of Assists</th>
                      <th className="py-3 px-6 text-center">AVG Number of Intercepts</th>
                      <th className="py-3 px-6 text-center">AVG Number Shots Blocked</th>
-                     <th className="py-3 px-6 text-center">Shot Success</th>
+                     <th className="py-3 px-6 text-center">AVG Shot Success</th>
                      <th className="py-3 px-6 text-center">Actions</th>
                   </tr>
                </thead>

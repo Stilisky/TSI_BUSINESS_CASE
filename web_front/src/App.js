@@ -14,7 +14,7 @@ function App() {
         <Route path='/register' Component={Register} />
         <Route path='/login' Component={Login} />
         <Route path='/dashboard' Component={Dashboard} />
-        <Route path='/player' Component={Player} />
+        <Route path='/players/views/:playerId' Component={Player} />
       </Routes>
     </BrowserRouter>
   );
