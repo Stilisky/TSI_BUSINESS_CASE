@@ -4,6 +4,7 @@ import LandingPage from './views/LandingPage';
 import Register from './views/Register';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
+import Player from './views/Player';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/register' Component={Register} />
         <Route path='/login' Component={Login} />
         <Route path='/dashboard' Component={Dashboard} />
+        <Route path='/player' Component={Player} />
       </Routes>
     </BrowserRouter>
   );
