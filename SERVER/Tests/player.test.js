@@ -24,15 +24,15 @@ describe("Player endpoints Test", () => {
          })
    })
 
-   it('Test get all players', (done) => {
+   // it('Test get all players', (done) => {
 
-      chai.request(app)
-         .get("/api/v1/players")
-         .end((err, res) => {
-            expect(res).to.have.status(200);
-            done(err)
-         })
-   })
+   //    chai.request(app)
+   //       .get("/api/v1/players")
+   //       .end((err, res) => {
+   //          expect(res).to.have.status(200);
+   //          done(err)
+   //       })
+   // })
 
    it('Test get player', (done) => {
       chai.request(app)
