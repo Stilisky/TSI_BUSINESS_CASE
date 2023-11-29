@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect, useState } from 'react'
-import playerimg from '../assets/images/player.png'
+// import playerimg from '../assets/images/player.png'
 import { Link, useNavigate } from 'react-router-dom'
 import EditPlayer from './EditPlayer'
 
@@ -51,9 +51,9 @@ const PlayerRow = ({player, getPlayers}) => {
   return (
     <>
       <tr className="border-b border-gray-200 bg-white hover:bg-gray-100">
-         <td className="py-3 px-6 text-left">
+         <td className="py-3 px-6 text-center">
             <div className="flex items-center">
-               <img src={playerimg} alt="iMac Front Image" class="w-auto rounded-lg h-8 mr-3"/>
+               <img src={player.image} alt="iMac Front Image" class="w-14 rounded-lg h-14 mr-3"/>
             </div>
          </td>
          <td className="py-3 px-6 text-left">

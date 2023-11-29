@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 
 const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    const [name, setName] = useState(null)
@@ -32,27 +31,24 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
                playerName : name,
                jerseyNumber: jersey,
                position: pos,
-               image: img
+               image:  await uploadimage(img)
             }
-            uploadimage(img)
-            // const link = await uploadimage(img)
-            // console.log(link);
-            // const response = await fetch(url, {
-            //    method: 'POST',
-            //    headers: {
-            //       'Authorization': `Bearer ${token}`,
-            //       'Content-Type': 'application/json'
-            //    },
-            //    body: JSON.stringify(request)
-            // })
-            // if(response.ok) {
-            //    closeModal()
-            //    getPlayers()
-            //    setPos(null)
-            // } else {
-            //    const data = await response.json()
-            //    setError(data)
-            // }
+            const response = await fetch(url, {
+               method: 'POST',
+               headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify(request)
+            })
+            if(response.ok) {
+               closeModal()
+               getPlayers()
+               setPos(null)
+            } else {
+               const data = await response.json()
+               setError(data)
+            }
          } else {
             setError({message:'All fields are required'})
          }
@@ -66,24 +62,22 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    }
 
    const uploadimage = async (file) => {
-      const url = `${process.env.REACT_APP_CLOUDINARY_URL}`
-      let link;
-      let formData = new FormData()
-      formData.append('image', file)
-      formData.append("upload_preset", 'pvo7bpce')
-      formData.append("cloud_name", 'dxatnqjwk')
-      const res = await fetch(url, {
-         method: 'POST',
-         body: formData
-      })
-      const data= await res.json()
-      // axios.post(
-      //    url,
-      //    formData
-      // ).then((res) => {
-      //    console.log(res.data.secure_url)
-      // })
-      // return link;
+      if(file !== 'player.jpg'){
+         const url = `${process.env.REACT_APP_CLOUDINARY_URL}`
+         let formData = new FormData()
+         formData.append('file', file)
+         formData.append("upload_preset", `${process.env.REACT_APP_UPLOAD_PRESET}`)
+         formData.append("cloud_name", 'dxatnqjwk')
+         const res = await fetch(url, {
+            method: 'POST',
+            body: formData
+         })
+         const data= await res.json()
+         const link = data.secure_url
+         return link
+      } else {
+         return 'https://res.cloudinary.com/dxatnqjwk/image/upload/v1701284566/k6idm1zynrckafw0ezde.webp'
+      }
    }
 
    if(!isOpen) return null;

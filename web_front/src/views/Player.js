@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useParams } from 'react-router-dom'
-import bas from '../assets/images/bas.webp'
+// import bas from '../assets/images/bas.webp'
 import DetailsRow from '../components/DetailsRow'
 import MatchModel from '../components/MatchModel'
 
@@ -61,7 +61,7 @@ const Player = () => {
       <Navbar/>
       <div className='flex flex-rows mt-4'>
          <div className='w-[30%] ml-4 flex justify-center'>
-            <img src={bas} alt='fdd' className='w-80 h-80'/>
+            <img src={player.image} alt='Player' className='max-w-80 max-h-80'/>
          </div>
          <div className='ml-8 w-[70%]'>
             <div className='flex justify-center mt-4'>

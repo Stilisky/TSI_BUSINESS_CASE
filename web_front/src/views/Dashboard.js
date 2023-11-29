@@ -64,6 +64,9 @@ const Dashboard = () => {
             </table>
          </div>
       </div>
+      <div className='flex justify-center border-t-2 mt-4 pt-2 pb-2'>
+         <p className='text-1xl font-bold'>© - 2024</p>
+      </div>
     </>
   )
 }
