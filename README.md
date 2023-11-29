@@ -56,7 +56,7 @@ To run unit test ``` npx mocha Tests/ ```
 
 2. Copie .env copy to .env
 
-3. Add .env variable (API_URL, CLOUDINARY)
+3. Add .env variable (API_URL, CLOUDINARY_URL, UPLOAD_PRESET)
 
 4. Install the required dependencies:
 
