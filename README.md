@@ -20,7 +20,7 @@ A comprehensive frontend and backend solution for managing players, Developed in
   
 ### Installation
 
-1. Clone the repository:
+ Clone the repository:
    
 ``` git clone repo_link ```
 
@@ -30,11 +30,11 @@ A comprehensive frontend and backend solution for managing players, Developed in
 
 ```cd SERVER```
 
-3. Install the required dependencies:
+2. Install the required dependencies:
 
 ```npm install```
 
-4. Start the server:
+3. Start the server:
 
 ```npm start```
 
@@ -54,10 +54,10 @@ To run unit test ``` npx mocha Tests/ ```
 
 ```cd web_front```
 
-3. Install the required dependencies:
+2. Install the required dependencies:
 
 ```npm install```
 
-4. Start the server:
+3. Start the server:
 
 ```npm start```

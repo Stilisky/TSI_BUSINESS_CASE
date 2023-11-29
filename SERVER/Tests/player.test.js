@@ -74,4 +74,14 @@ describe("Player endpoints Test", () => {
             done(err)
          })
    })
+
+   it('Unit Data Process', (done) => {
+      
+      chai.request(app)
+         .get("/api/v1/players/6563d76e10ec675493c2288d/statistiques")
+         .end((err, res) => {
+            expect(res).to.have.status(200);
+            done(err)
+         })
+   })
 })
