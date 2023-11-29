@@ -28,8 +28,7 @@ const EditPlayer = ({isOpen, closeModal, getPlayers, player }) => {
          const request = {
             playerName : name,
             jerseyNumber: jersey,
-            position: pos,
-            image: img
+            position: pos
          }
          console.log(request);
          const response = await fetch(url, {
