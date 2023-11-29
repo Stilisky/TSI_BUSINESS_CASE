@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useParams } from 'react-router-dom'
-// import bas from '../assets/images/bas.webp'
 import DetailsRow from '../components/DetailsRow'
 import MatchModel from '../components/MatchModel'
 
 const Player = () => {
    const [players, setPlayers] = useState(null)
+   const [long, setLong] = useState(null)
    const [player, setPlayer] = useState([])
    const [avg, setAvg] = useState([])
    const [matches, setMatches] = useState([])
@@ -27,6 +27,7 @@ const Player = () => {
          const response = await fetch(url, {headers: {'Authorization': `Bearer ${token}`}})
          const data = await response.json()
          setPlayer(data)
+         setLong(data.performance.length)
          setMatches(data.performance.slice(-5))
       } catch (error) {
          console.log(error);
@@ -76,7 +77,7 @@ const Player = () => {
                   <h3 className='text-2xl mt-4'><span className='font-bold underline'>AVG Number of Assists</span>: {avg.avgNumberAssists}</h3>
                </div>
                <div className='mr-8 '>
-                  <h3 className='text-2xl mt-4'><span className='font-bold underline'>Number of Matches</span>: {matches.length} </h3>
+                  <h3 className='text-2xl mt-4'><span className='font-bold underline'>Number of Matches</span>: {long} </h3>
                   <h3 className='text-2xl mt-4'><span className='font-bold underline'>Position</span>: {player.position} </h3>
                   <h3 className='text-2xl mt-4'><span className='font-bold underline'>AVG Number of Intercepts</span>: {avg.avgNumberIntercepts} </h3>
                   <h3 className='text-2xl mt-4'><span className='font-bold underline'>AVG Rate Shot Success</span>: {avg.avgShotSuccess} %</h3>

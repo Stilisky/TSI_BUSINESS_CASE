@@ -26,9 +26,12 @@ const Login = () => {
           const data = await response.json()
           localStorage.setItem('token', data.acces_token)
           navigation('/dashboard')
+        }else {
+          const data = await response.json()
+          setError(data.message)
         }
       } catch (error) {
-         setError(error.message)
+        setError(error.message)
       }
    }
   return (
