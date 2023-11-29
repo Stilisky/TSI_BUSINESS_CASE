@@ -51,6 +51,8 @@ const MatchModel = ({isOpen, closeModal, players}) => {
                closeModal()
                setPlayer(null)
                navigate(`/players/views/${player}`)
+            } else if(response.status === 401){
+               navigate("/login")
             } else {
                const data = await response.json()
                setError(data)

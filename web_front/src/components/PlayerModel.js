@@ -45,6 +45,8 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
                closeModal()
                getPlayers()
                setPos(null)
+            } else if(response.status === 401){
+               navigate("/login")
             } else {
                const data = await response.json()
                setError(data)

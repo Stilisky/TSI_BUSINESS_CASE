@@ -44,6 +44,8 @@ const EditPlayer = ({isOpen, closeModal, getPlayers, player }) => {
             closeModal()
             getPlayers()
             setPos(null)
+         } else if(response.status === 401){
+            navigate("/login")
          } else {
             const data = await response.json()
             setError(data)
