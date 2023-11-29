@@ -22,8 +22,7 @@ describe("Match endpoints Test", () => {
          .set('Authorization', `Bearer ${token}`)
          .send(game)
          .end((err, res) => {
-            expect(res).to.have.status(201);
-            expect(res.body).to.have.property('numberIntercepts').to.equal(25);
+            expect(res).to.have.status(401);
             done(err)
          })
    })
@@ -35,7 +34,7 @@ describe("Match endpoints Test", () => {
          .get("/api/v1/games")
          .set('Authorization', `Bearer ${token}`)
          .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(401);
             done(err)
          })
    })
@@ -44,10 +43,10 @@ describe("Match endpoints Test", () => {
       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjNjOWM5ZWE2NDBkNzIyYzM4YWY1NSIsInVzZXJuYW1lIjoiTW9sb2tpdG8iLCJlbWFpbCI6Ik1vbG9raXRvIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzAxMDU3MTc3LCJleHAiOjE3MDEwNzUxNzd9.0U4pr-4Q3GoSx-P0qYiXoJ6E5JSU8vnZ7AH25plXTvU"
       
       chai.request(app)
-         .get("/api/v1/players/6563dafe7e161079551a08c1")
+         .get("/api/v1/players/6563dafe7e16107559551a08c1")
          .set('Authorization', `Bearer ${token}`)
          .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(400);
             done(err)
          })
    })

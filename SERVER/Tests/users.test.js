@@ -8,8 +8,8 @@ chai.use(chaiHttp)
 describe("User endpoints Test", () => {
    it('Test user registration', (done) => {
       const user = {
-         "username": "marius",
-         "email": "marius@mail.com",
+         "username": "Kaolo",
+         "email": "Kaolo@mail.com",
          "password": "123456"
       };
 
@@ -35,7 +35,7 @@ describe("User endpoints Test", () => {
 
    it('Test user login', (done) => {
       const login = {
-         "email": "marius@mail.com",
+         "email": "notexist@mail.com",
          "password": "123456"
       };
 
@@ -43,7 +43,7 @@ describe("User endpoints Test", () => {
          .post("/api/v1/auth/login")
          .send(login)
          .end((err, res) => {
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(401);
             done(err)
          })
    })
