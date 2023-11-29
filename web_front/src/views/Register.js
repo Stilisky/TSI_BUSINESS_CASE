@@ -20,7 +20,7 @@ const Register = () => {
                password: pass
             }
             console.log(request);
-            const url = "http://127.0.0.1:5000/api/v1/auth/register"
+            const url = `${process.env.REACT_APP_API_URL}/api/v1/auth/register`
             const response = await fetch(url, {
                method: 'POST',
                headers: {

@@ -15,7 +15,7 @@ const Dashboard = () => {
    }, [])
    const getPlayers = async () => {
       try {
-         const url = "http://127.0.0.1:5000/api/v1/players"
+         const url = `${process.env.REACT_APP_API_URL}/api/v1/players`
          const response = await fetch(url)
          const data = await response.json()
          setPlayers(data)

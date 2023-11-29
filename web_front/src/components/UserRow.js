@@ -18,7 +18,7 @@ const UserRow = ({user}) => {
          if(!token){
             navigate('/login')
          } else {
-            const url = `http://127.0.0.1:5000/api/v1/auth/users/${user._id}`
+            const url = `${process.env.REACT_APP_API_URL}/api/v1/auth/users/${user._id}`
             const response = await fetch(url, {
                method: 'DELETE',
                headers: {
@@ -46,7 +46,7 @@ const UserRow = ({user}) => {
          if(!token){
             navigate('/login')
          } else {
-            const url = `http://127.0.0.1:5000/api/v1/auth/users/${user._id}`
+            const url = `${process.env.REACT_APP_API_URL}/api/v1/auth/users/${user._id}`
             const request = {
                role : (admin ? 'USER' : 'ADMIN') 
             }

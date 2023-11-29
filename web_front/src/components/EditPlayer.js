@@ -24,7 +24,7 @@ const EditPlayer = ({isOpen, closeModal, getPlayers, player }) => {
    const handleSubmit = async () => {
       try {
          const token = localStorage.getItem('token')
-         const url = `http://127.0.0.1:5000/api/v1/players/${player._id}`
+         const url = `${process.env.REACT_APP_API_URL}/api/v1/players/${player._id}`
          const request = {
             playerName : name,
             jerseyNumber: jersey,

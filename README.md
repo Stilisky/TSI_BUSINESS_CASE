@@ -16,7 +16,7 @@ A comprehensive frontend and backend solution for managing players, Developed in
 
 - Node.js (v18.16.0 or newer)
 - MongoDB
-- A .env file with necessary environment variables (e.g. MONGO_URI, JWT_SECRET_KEY).
+- A .env file with necessary environment variables (e.g. SECRET_KEY).
   
 ### Installation
 
@@ -54,10 +54,14 @@ To run unit test ``` npx mocha Tests/ ```
 
 ```cd web_front```
 
-2. Install the required dependencies:
+2. Copie .env copy to .env
+
+3. Add .env variable (API_URL, CLOUDINARY)
+
+4. Install the required dependencies:
 
 ```npm install```
 
-3. Start the server:
+5. Start the server:
 
 ```npm start```

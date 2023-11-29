@@ -29,7 +29,7 @@ const MatchModel = ({isOpen, closeModal, players}) => {
       try {
          const token = localStorage.getItem('token')
          if(pointS && player && team && assist && intercept && shots && success) {
-            const url = `http://127.0.0.1:5000/api/v1/games/player/${player}`
+            const url = `${process.env.REACT_APP_API_URL}/api/v1/games/player/${player}`
             const request = {
                opposingTeam: team,
                pointsScored: pointS,

@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    const [name, setName] = useState(null)
    const [jersey, setJersey] = useState(null)
    const [pos, setPos] = useState(null)
-   const [img, setImg] = useState(null)
+   const [img, setImg] = useState("player.jpg")
    const [error, setError] = useState(null)
    const navigate = useNavigate()
    
@@ -25,7 +26,7 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    const handleSubmit = async () => {
       try {
          const token = localStorage.getItem('token')
-         const url = "http://127.0.0.1:5000/api/v1/players"
+         const url = `${process.env.REACT_APP_API_URL}/api/v1/players`
          if(name && jersey && pos) {
             const request = {
                playerName : name,
@@ -33,23 +34,25 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
                position: pos,
                image: img
             }
-            console.log(request);
-            const response = await fetch(url, {
-               method: 'POST',
-               headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json'
-               },
-               body: JSON.stringify(request)
-            })
-            if(response.ok) {
-               closeModal()
-               getPlayers()
-               setPos(null)
-            } else {
-               const data = await response.json()
-               setError(data)
-            }
+            uploadimage(img)
+            // const link = await uploadimage(img)
+            // console.log(link);
+            // const response = await fetch(url, {
+            //    method: 'POST',
+            //    headers: {
+            //       'Authorization': `Bearer ${token}`,
+            //       'Content-Type': 'application/json'
+            //    },
+            //    body: JSON.stringify(request)
+            // })
+            // if(response.ok) {
+            //    closeModal()
+            //    getPlayers()
+            //    setPos(null)
+            // } else {
+            //    const data = await response.json()
+            //    setError(data)
+            // }
          } else {
             setError({message:'All fields are required'})
          }
@@ -60,6 +63,27 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
    const closeMod = () => {
       setError(null)
       closeModal()
+   }
+
+   const uploadimage = async (file) => {
+      const url = `${process.env.REACT_APP_CLOUDINARY_URL}`
+      let link;
+      let formData = new FormData()
+      formData.append('image', file)
+      formData.append("upload_preset", 'pvo7bpce')
+      formData.append("cloud_name", 'dxatnqjwk')
+      const res = await fetch(url, {
+         method: 'POST',
+         body: formData
+      })
+      const data= await res.json()
+      // axios.post(
+      //    url,
+      //    formData
+      // ).then((res) => {
+      //    console.log(res.data.secure_url)
+      // })
+      // return link;
    }
 
    if(!isOpen) return null;
@@ -91,7 +115,7 @@ const PlayerModel = ({isOpen, closeModal, getPlayers}) => {
                </select>
 
                <label for="photo" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Player image </label>
-               <input onChange={(text) => {setImg(text.target.value)}} type='file' className=" mt-2 text-gray-600 focus:outline-none font-normal w-full h-10 flex items-center pl-3 text-sm  " />
+               <input onChange={(text) => {setImg(text.target.files[0])}} type='file' className=" mt-2 text-gray-600 focus:outline-none font-normal w-full h-10 flex items-center pl-3 text-sm  " />
 
                <div className="flex items-center justify-start w-full">
                   <button onClick={handleSubmit} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700 transition duration-150 ease-in-out hover:bg-green-600 bg-green-700 rounded text-white px-8 py-2 text-sm">Create player</button>
